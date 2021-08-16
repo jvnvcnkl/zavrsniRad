@@ -1,4 +1,7 @@
+<?php include('DBconnection.php');
 
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,29 +19,15 @@
 
     <!-- Custom styles for this template -->
     <link href="styles/blog.css" rel="stylesheet">
+    
 </head>
 
 <body>
 
 <header>
-    <div class="blog-masthead">
-        <div class="container">
-            <nav class="nav">
-                <a class="nav-link active" href="#">Home</a>
-                <a class="nav-link" href="#">New features</a>
-                <a class="nav-link" href="#">Press</a>
-                <a class="nav-link" href="#">New hires</a>
-                <a class="nav-link" href="#">About</a>
-            </nav>
-        </div>
-    </div>
+<?php include('header.php')
+?>
 
-    <div class="blog-header">
-        <div class="container">
-            <h1 class="blog-title">The Bootstrap Blog</h1>
-            <p class="lead blog-description">An example blog template built with Bootstrap.</p>
-        </div>
-    </div>
 </header>
 
 <main role="main" class="container">
@@ -51,7 +40,7 @@
                 <h2 class="blog-post-title">Sample blog post</h2>
                 <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
 
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
+                <p>This blog post shows a few different types of content thats supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
                 <hr>
                 <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
                 <blockquote>
@@ -113,47 +102,14 @@
 
         </div><!-- /.blog-main -->
 
-        <aside class="col-sm-3 ml-sm-auto blog-sidebar">
-            <div class="sidebar-module sidebar-module-inset">
-                <h4>About</h4>
-                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-            </div>
-            <div class="sidebar-module">
-                <h4>Archives</h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">March 2014</a></li>
-                    <li><a href="#">February 2014</a></li>
-                    <li><a href="#">January 2014</a></li>
-                    <li><a href="#">December 2013</a></li>
-                    <li><a href="#">November 2013</a></li>
-                    <li><a href="#">October 2013</a></li>
-                    <li><a href="#">September 2013</a></li>
-                    <li><a href="#">August 2013</a></li>
-                    <li><a href="#">July 2013</a></li>
-                    <li><a href="#">June 2013</a></li>
-                    <li><a href="#">May 2013</a></li>
-                    <li><a href="#">April 2013</a></li>
-                </ol>
-            </div>
-            <div class="sidebar-module">
-                <h4>Elsewhere</h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Facebook</a></li>
-                </ol>
-            </div>
-        </aside><!-- /.blog-sidebar -->
+        <?php include('sidebar.php') ?> <!-- /.blog-sidebar -->
 
     </div><!-- /.row -->
 
 </main><!-- /.container -->
 
-<footer class="blog-footer">
-    <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-    <p>
-        <a href="#">Back to top</a>
-    </p>
+<footer class="blog-footer"> <?php include('footer.php')
+?>
 </footer>
 </body>
 </html>
