@@ -41,11 +41,11 @@ $result = $conn->query($sql);
   while($row = $result->fetch_assoc()) {
     echo  "<div class=\"blog-post\"> ";
     echo "<h2 class=\"blog-post-title\"> " ;
-    echo  "<a href=single-post.php\";
-    echo $row["id"];
+    echo  "<a href=single-post.php" ;
+    echo  "\\?postId=" .$row["id"];
     echo ">";
     echo  $row["title"] ;
-    echo  "</h2> <p class=\"blog-post-meta\">"; 
+    echo  "</a> </h2> <p class=\"blog-post-meta\">"; 
     echo  $row["created_at"];
     echo  "<a href=\'#\'> ";
     echo $row["author"] ;
