@@ -7,6 +7,7 @@
 $result = $conn->query($sql);
 $result2= $conn->query($comments);
 
+$hasError = isset($_GET['error'])
 ?>
 <!doctype html>
 <html lang="en">
@@ -63,6 +64,18 @@ $result2= $conn->query($comments);
               
                
             </div><!-- /.blog-post -->
+<hr>  
+             <!-- add comment --> 
+           <div> <form action="..\create-comment.php" method="POST">
+            <input type="hidden" value="<?php echo $id; ?>" name="post_id" />
+    <label for='name'>Author</label> 
+    <input type="text" name='author' id='name' placeholder="Your name">
+    <?php if($hasError){  echo ' <el class=\'alert-danger\'>*Required field. </el>' ; } ?><br>
+    <label for='message'>Write your message</label> 
+    <textarea  name="message" placeholder="Your message"></textarea>
+    <?php  if($hasError) { echo ' <el class=\'alert-danger\'>*Required field. </el>' ; }?> <br>
+    <button id='sbmtBtn'>Submit</button>
+  </form> </div><hr>
                 <button id='btn' class="btn"> Hide Comments</button>
             <div class='comments' > <ul>
             <?php  if ($result2->num_rows > 0) {
@@ -74,6 +87,9 @@ $result2= $conn->query($comments);
                 echo " </h5>";
                 echo "<p class='comment-text'>";
                 echo $singleComment['text'];
+                echo "<button class='.btn-default' id='deleteCom";
+                echo $singleComment['id'];
+                echo "'>Izbrisi komentar</button>";
                 echo "</p>";
                 echo "<hr>";
                 echo "</li>";
@@ -81,7 +97,7 @@ $result2= $conn->query($comments);
         }
           ?>
             </ul>
-            </div>
+            </div><!-- /.blog comments -->
 
 
 
@@ -98,10 +114,17 @@ $result2= $conn->query($comments);
 
 </main><!-- /.container -->
 
-<script > 
-const commentsButton = document.querySelector('.btn')
+
+
+
+<footer class="blog-footer"> <?php include('footer.php')
+?>
+</footer>
+
+<script> 
+const commentsButton = document.querySelector('#btn')
 const commentDiv=document.querySelector('.comments')
-console.log(commentsButton)
+const deleteComButton= document.querySelector('#deleteCom')
 commentsButton.addEventListener('click', () =>{
     
     if (commentDiv.style.display === "none") 
@@ -113,11 +136,12 @@ commentsButton.addEventListener('click', () =>{
         commentDiv.style.display = "none";
         
     }
-})
-</script>
 
-<footer class="blog-footer"> <?php include('footer.php')
-?>
-</footer>
+})
+deleteComButton.addEventListener('click', () =>{
+    console.log('Proba')
+})
+
+</script>
 </body>
 </html>
