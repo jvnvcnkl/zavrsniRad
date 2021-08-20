@@ -57,8 +57,7 @@ $result = $conn->query($sql);
     echo $row['body'];
   } }?>
             
-
-              
+</div>          
                
             </div><!-- /.blog-post -->
 

@@ -1,8 +1,8 @@
 <?php
  include('DBconnection.php');
  $id=$_GET['postId'];
-
-  $sql = "SELECT id,title,body,author,created_at FROM posts WHERE id=$id";
+ $sql = "SELECT p.title, p.body, p.author,p.id, p.created_at,u.first_name,u.last_name FROM posts as p
+  LEFT JOIN users as u ON p.author=u.id;";
   $comments="SELECT DISTINCT author,text,id FROM comments WHERE post_id=$id";
 $result = $conn->query($sql);
 $result2= $conn->query($comments);
@@ -55,7 +55,9 @@ $hasError = isset($_GET['error'])
         echo  "</a> </h2> <p class=\"blog-post-meta\">"; 
         echo  $row["created_at"];
         echo  "<a href=\'#\'> ";
-        echo $row["author"] ;
+        echo $row["first_name"] ;
+        echo " ";
+        echo $row["last_name"] ;
         echo " </a></p>" ."<br>" ;
         echo $row['body'];
  ?>
