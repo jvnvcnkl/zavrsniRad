@@ -9,7 +9,7 @@ echo  "<h4>Latest Posts</h4>";
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
            
-   echo "<a href=\"/single-post.php/?postId="; 
+   echo "<a href=\"/single-post.php?postId="; 
    echo $row['id'];
    echo " \" >";
    echo $row['title'];

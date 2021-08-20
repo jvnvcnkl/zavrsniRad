@@ -3,7 +3,7 @@
  $id=$_GET['postId'];
 
   $sql = "SELECT id,title,body,author,created_at FROM posts WHERE id=$id";
-  $comments="SELECT DISTINCT author,text FROM comments WHERE post_id=$id";
+  $comments="SELECT DISTINCT author,text,id FROM comments WHERE post_id=$id";
 $result = $conn->query($sql);
 $result2= $conn->query($comments);
 
@@ -48,8 +48,8 @@ $hasError = isset($_GET['error'])
         $row = $result->fetch_assoc();
         echo  "<div class=\"blog-post\"> ";
         echo "<h2 class=\"blog-post-title\"> " ;
-        echo  "<a href=single-post.php" ;
-        echo  "\\?postId=" .$row["id"];
+        echo  "<a href=\single-post.php" ;
+        echo  "\?postId=" .$row["id"];
         echo ">";
         echo  $row["title"] ;
         echo  "</a> </h2> <p class=\"blog-post-meta\">"; 
@@ -59,8 +59,8 @@ $hasError = isset($_GET['error'])
         echo " </a></p>" ."<br>" ;
         echo $row['body'];
  ?>
-            
-
+            <hr>
+      <div> <button id='deletePostBtn'> Delete this post </button></div>
               
                
             </div><!-- /.blog-post -->
@@ -80,8 +80,16 @@ $hasError = isset($_GET['error'])
             <div class='comments' > <ul>
             <?php  if ($result2->num_rows > 0) {
   while($singleComment = $result2->fetch_assoc())
-          {
+        {       echo "<div>";
+                echo "<form method='POST' action='../delete-comment.php'";
                 echo "<li>";
+                echo " <input type='hidden' name='comment-id' value=' ";
+                echo $singleComment['id'];
+                echo " ' />";
+                echo "<input type='hidden' name='post_id' value='";
+                echo $id;
+                echo "' />";
+
                 echo "<h5 class='comment-author'>" ;
                 echo $singleComment['author'];
                 echo " </h5>";
@@ -90,9 +98,12 @@ $hasError = isset($_GET['error'])
                 echo "<button class='.btn-default' id='deleteCom";
                 echo $singleComment['id'];
                 echo "'>Izbrisi komentar</button>";
+
                 echo "</p>";
                 echo "<hr>";
                 echo "</li>";
+                echo "</form>";
+                echo "<div>";
           }
         }
           ?>
@@ -123,8 +134,8 @@ $hasError = isset($_GET['error'])
 
 <script> 
 const commentsButton = document.querySelector('#btn')
+const deletePost=document.querySelector('#deletePostBtn')
 const commentDiv=document.querySelector('.comments')
-const deleteComButton= document.querySelector('#deleteCom')
 commentsButton.addEventListener('click', () =>{
     
     if (commentDiv.style.display === "none") 
@@ -136,11 +147,17 @@ commentsButton.addEventListener('click', () =>{
         commentDiv.style.display = "none";
         
     }
+})
+deletePost.addEventListener('click', () => {
+    let confirmacija=confirm("Do you really want to delete this post?")
+    if(confirmacija){
+    window.location.href = "/delete-post.php?postId=<?php echo $id;?>";
+}
+
 
 })
-deleteComButton.addEventListener('click', () =>{
-    console.log('Proba')
-})
+
+
 
 </script>
 </body>

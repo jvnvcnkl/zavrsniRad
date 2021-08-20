@@ -1,7 +1,8 @@
 <?php
  include('DBconnection.php');
-  $sql = "SELECT title,body,author,created_at FROM posts ORDER BY created_at DESC;";
-$result = $conn->query($sql);
+ $sql = "SELECT p.title, p.body, p.author,p.id, p.created_at,u.first_name,u.last_name FROM posts as p
+ LEFT JOIN users as u ON p.author=u.id;";
+ $result = $conn->query($sql);
 
 ?>
 <!doctype html>
@@ -38,22 +39,25 @@ $result = $conn->query($sql);
 
         <div class="col-sm-8 blog-main">
             <?php  if ($result->num_rows > 0) {
+            
   while($row = $result->fetch_assoc()) {
     echo  "<div class=\"blog-post\"> ";
     echo "<h2 class=\"blog-post-title\"> " ;
-    echo  "<a href=single-post.php> ";
+    echo  "<a href=single-post.php" ;
+    echo  "\\?postId=" .$row["id"];
+    echo ">";
     echo  $row["title"] ;
-    echo  "</h2> <p class=\"blog-post-meta\">"; 
+    echo  "</a> </h2> <p class=\"blog-post-meta\">"; 
     echo  $row["created_at"];
     echo  "<a href=\'#\'> ";
-    echo $row["author"] ;
+    echo $row["first_name"] ;
+    echo " ";
+    echo $row["last_name"] ;
     echo " </a></p>" ."<br>" ;
     echo $row['body'];
   } }?>
             
-
-              
-               
+</div>
             </div><!-- /.blog-post -->
 
 
